@@ -10,17 +10,23 @@ import java.util.Iterator;
 class EjercicioR481 {
     public String devolverEnOrden(ArrayList<Integer> numeros) {
         String cadenaADevolver = "";
-        ArrayList<Integer> copiaNumeros = new ArrayList<>(numeros);
-        while(copiaNumeros.size() > 0) {
-            Integer mayorNumero = copiaNumeros.get(0);
-            for(int i = 1; i < copiaNumeros.size(); i++) {
-                Integer numeroActual = copiaNumeros.get(i);
-                if(numeroActual > mayorNumero) {
-                    mayorNumero = numeroActual;
+        if(numeros.size() > 0) { 
+            ArrayList<Integer> copiaNumeros = new ArrayList<>(numeros);
+            boolean detector = true; // Detecta si se ejecuta el if.
+            while(detector) {
+                detector = false;
+                for(int i = 0; i < copiaNumeros.size() - 1; i++) {
+                    if(copiaNumeros.get(i) < copiaNumeros.get(i + 1)) {
+                        int temp = copiaNumeros.get(i);
+                        copiaNumeros.set(i, copiaNumeros.get(i + 1));
+                        copiaNumeros.set(i + 1, temp);
+                        detector = true;
+                    } 
                 }
             }
-            cadenaADevolver += mayorNumero + ", ";
-            copiaNumeros.remove(mayorNumero);
+            for(Integer numero : copiaNumeros){
+                cadenaADevolver += numero + ", ";
+            }
         }
         if(cadenaADevolver.length() > 0) {
             cadenaADevolver = cadenaADevolver.substring(0,cadenaADevolver.length() - 2);
